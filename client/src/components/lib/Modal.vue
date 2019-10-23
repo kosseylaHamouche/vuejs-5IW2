@@ -61,6 +61,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    z-index: 1;
 }
 
 .modal-title {

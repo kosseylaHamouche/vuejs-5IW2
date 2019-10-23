@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <h1 class="list-name">{{name}}</h1>
+    <h1 class="list-name">{{name}} {{cards | countDone}}</h1>
     <div v-if="cards.length > 0" class="list-cards">
       <Card v-for="card in cards" v-bind="card" v-bind:key="card.id"/>
     </div>
@@ -31,6 +31,9 @@ export default {
   data: () => ({
     showForm: false
   }),
+  filters: {
+    countDone: cards => cards.filter(card => card.status === "done").length
+  },
   methods: {
     toggleForm: function () {
       this.showForm = !this.showForm
