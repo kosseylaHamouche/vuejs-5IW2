@@ -1,16 +1,17 @@
 <template>
     <div class="modal" v-if="open">
+        <div class="backdrop" @click="onClose"></div>
         <div class="modal-container">
             <div class="modal-title">
                 <h1>{{title}}</h1>
-                <a>X</a>
+                <a @click="onClose">X</a>
             </div>
             <div class="modal-content">
                 <slot></slot>
             </div>
             <div class="modal-footer">
                 <slot name="footer">
-                    <a @click="onClose">Close</a>
+                    <a @click="onClose">X</a>
                     <a @click="onSubmit">Submit</a>
                 </slot>
             </div>
@@ -36,10 +37,20 @@ export default {
     top: 0;
     left: 0;
     height: 100%;
-    width: 100;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.modal > .backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.3;
 }
 .modal > .modal-container {
     min-width: 40%;

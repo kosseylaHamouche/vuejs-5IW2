@@ -32,8 +32,13 @@
 </template>
 
 <script>
+import Modal from "./lib/Modal";
+
 export default {
     name: "NewCard",
+    components: {
+        Modal
+    },
     data: () => ({
         name: "",
         description: "",
@@ -46,7 +51,7 @@ export default {
     },
     methods: {
         handleSubmit: function() {
-            this.$emit('new-card', this.$data);
+            this.$emit('new-card', {...this.$data});
         }
     }
 }

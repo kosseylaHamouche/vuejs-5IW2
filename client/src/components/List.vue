@@ -8,14 +8,14 @@
       <p>Pas de cards </p>
     </div>
     <a @click="toggleForm"> + Add new Card</a>
-    <NewCard @new-card="handleNewCard" v-if="showForm" />
+    <NewCard :open="showForm" :onClose="toggleForm" @new-card="handleNewCard" />
   </div>
 </template>
 
 <script>
 
 import Card from "./Card"
-import NewCard from "./NewCard"
+import NewCard from "./NewCardPlusPlus"
 
 export default {
   name: 'List',
@@ -55,6 +55,7 @@ div.list {
   width: 20%;
   background-color: blue;
   margin-left: 10px;
+  position: relative;
 }
 
 div.list-name {
