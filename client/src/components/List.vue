@@ -8,8 +8,7 @@
       <p>Pas de cards </p>
     </div>
     <a @click="toggleForm"> + Add new Card</a>
-    <h1 v-if="showForm">test</h1>
-    <NewCard v-if="showForm" />
+    <NewCard @new-card="handleNewCard" v-if="showForm" />
   </div>
 </template>
 
@@ -26,7 +25,8 @@ export default {
   },
   props: {
     cards: Array,
-    name: String
+    name: String,
+    onNewCard: Function
   },
   data: () => ({
     showForm: false
@@ -34,6 +34,11 @@ export default {
   methods: {
     toggleForm: function () {
       this.showForm = !this.showForm
+    },
+    handleNewCard: function(card) {
+      const {onNewCard, ...list} = this.$props;
+      this.toggleForm();
+      onNewCard(card, list);
     }
   }
 };

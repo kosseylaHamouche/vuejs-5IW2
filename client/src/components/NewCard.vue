@@ -23,6 +23,7 @@
                 <input type="radio" v-model="status" value="done" name="status" />
             </label>
         </div>
+        <button @click="handleSubmit">Submit</button>
     </div>
 </template>
 
@@ -34,7 +35,12 @@ export default {
         description: "",
         velocity: 0,
         status: "new"
-    })
+    }),
+    methods: {
+        handleSubmit: function() {
+            this.$emit('new-card', this.$data);
+        }
+    }
 }
 </script>
 

@@ -3,7 +3,7 @@
     <a href="https://google.fr" v-on:click.prevent="alert($event.target.href)">Google</a>
     <h1 class="board-name">{{name}}</h1>
     <div class="board-lists">
-      <list v-for="list in lists" v-bind="list" v-bind:key="list.id"/>
+      <list :onNewCard="onNewCard" v-for="list in lists" v-bind="list" v-bind:key="list.id"/>
     </div>
   </div>
 </template>
@@ -45,7 +45,18 @@ export default {
       }
     ],
     name: "Board1"
-  })
+  }),
+  methods: {
+    onNewCard: function (card, into) {
+      this.lists = this.lists.map(list => {
+        if (list.name !== into.name) return list;
+        return {
+          ...list,
+          cards: [card, ...list.cards]
+        };
+      })
+    }
+  }
 }
 </script>
 
