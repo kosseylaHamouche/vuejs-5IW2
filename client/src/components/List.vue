@@ -2,7 +2,7 @@
   <div class="list">
     <h1 class="list-name">{{name}} {{cards | countDone}}</h1>
     <div v-if="cards.length > 0" class="list-cards">
-      <Card v-for="card in cards" v-bind="card" v-bind:key="card.id"/>
+      <Card :onDrag="handleDrag(card)" v-for="card in cards" v-bind="card" v-bind:key="card.id"/>
     </div>
     <div v-else>
       <p>Pas de cards </p>
@@ -34,6 +34,7 @@ export default {
   filters: {
     countDone: cards => cards.filter(card => card.status === "done").length
   },
+  inject: ["onDrag"],
   methods: {
     toggleForm: function () {
       this.showForm = !this.showForm
@@ -42,6 +43,10 @@ export default {
       const {onNewCard, ...list} = this.$props;
       this.toggleForm();
       onNewCard(card, list);
+    },
+    handleDrag: function(card) {
+      const {onNewCard, ...list} = this.$props;
+      return () => this.onDrag(card, list);
     }
   }
 };

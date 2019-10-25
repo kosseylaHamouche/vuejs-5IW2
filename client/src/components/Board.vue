@@ -18,6 +18,7 @@ export default {
     List: List
   },
   data: () =>({
+    draggedItem: null,
     lists: [
       {
         name: "List1",
@@ -46,6 +47,11 @@ export default {
     ],
     name: "Board1"
   }),
+  provide: function() {
+    return {
+      onDrag: this.onDrag
+    };
+  },
   methods: {
     onNewCard: function (card, into) {
       this.lists = this.lists.map(list => {
@@ -55,6 +61,12 @@ export default {
           cards: [card, ...list.cards]
         };
       })
+    },
+    onDrag: function(card, list) {
+      this.draggedItem = {
+        card,
+        list
+      };
     }
   }
 }

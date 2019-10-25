@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" draggable="true" @dragstart="onDrag">
     <h1 class="card-name">{{name}}</h1>
     <p v-if="waiting">Waiting</p>
   </div>
@@ -10,6 +10,7 @@ export default {
   name: 'Card',
   props: {
     name: String,
+    onDrag: Function,
     waiting: {
       type: Boolean,
       default: () => false
