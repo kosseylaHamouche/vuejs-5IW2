@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="list" @dragover.prevent @drop="onDrop(name)">
     <h1 class="list-name">{{name}} {{cards | countDone}}</h1>
     <div v-if="cards.length > 0" class="list-cards">
       <Card :onDrag="handleDrag(card)" v-for="card in cards" v-bind="card" v-bind:key="card.id"/>
@@ -34,7 +34,7 @@ export default {
   filters: {
     countDone: cards => cards.filter(card => card.status === "done").length
   },
-  inject: ["onDrag"],
+  inject: ["onDrag", "onDrop"],
   methods: {
     toggleForm: function () {
       this.showForm = !this.showForm
