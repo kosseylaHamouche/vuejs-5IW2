@@ -14,15 +14,7 @@
                 <input v-model="velocity" id="velocity"/>
             </div>
             <div class="grid-row">
-                <label>Status</label>
-                <label>
-                    New
-                    <input type="radio" v-model="status" value="new" name="status" />
-                </label>
-                <label>
-                    Done
-                    <input type="radio" v-model="status" value="done" name="status" />
-                </label>
+                <RadioGroup label="Status" name="status" v-model="status" :choices="[{id: 'new', text: 'New'}, {id: 'done', text: 'Done'}]" />
             </div>
         </template>
         <template slot="footer">
@@ -33,11 +25,13 @@
 
 <script>
 import Modal from "./lib/Modal";
+import RadioGroup from "./lib/RadioGroup";
 
 export default {
     name: "NewCard",
     components: {
-        Modal
+        Modal,
+        RadioGroup
     },
     data: () => ({
         name: "",

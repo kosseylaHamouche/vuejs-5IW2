@@ -1,5 +1,6 @@
 <template>
   <div class="list" @dragover.prevent @drop="onDrop(name)">
+    <button@click="goToList">Select me</button>
     <h1 class="list-name">{{name}} {{cards | countDone}}</h1>
     <div v-if="cards.length > 0" class="list-cards">
       <Card :onDrag="handleDrag(card)" v-for="card in cards" v-bind="card" v-bind:key="card.id"/>
@@ -47,6 +48,14 @@ export default {
     handleDrag: function(card) {
       const {onNewCard, ...list} = this.$props;
       return () => this.onDrag(card, list);
+    },
+    goToList: function() {
+      this.$router.push({
+        name: "HomeList",
+        params: {
+          listid: this.name
+        }
+      })
     }
   }
 };
