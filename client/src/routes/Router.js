@@ -16,7 +16,7 @@ const router = new VueRouter({
             default: Board
         }
     },
-        {path: "/list/:listid",
+        {path: "/list",
         name:"HomeList", 
         components: {
             header: HeaderList,
@@ -24,7 +24,7 @@ const router = new VueRouter({
         },
         children: [
             {path: ":listid", component: List, props: (route) => ({
-                name: router.params.listid, cards: []
+                name: route.params.listid, cards: []
             })}
         ]
     },
